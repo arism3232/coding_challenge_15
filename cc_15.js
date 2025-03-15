@@ -3,9 +3,12 @@ const riskDashboard = document.getElementById('riskDashboard');
 const riskForm = document.getElementById('riskForm'); // Task2- Adding Risk Items Dynamically
 const increaseRiskBtn = document.getElementById('increaseRiskBtn'); // Task5- Implementing Bulk Updates
 console.log("Risk Dashboard Loaded");
-function addRiskItem(riskName, riskLevel, department) { // Task2- Adding Risk Items Dynamically
+
+// Task2- Adding Risk Items Dynamically
+function addRiskItem(riskName, riskLevel, department) { // Function to add risk item
     const riskCard = document.createElement('div');
     riskCard.className = 'riskCard';
+
     // Task4- Categorizing Risks By Level
     switch (riskLevel.toLowerCase()) {
         case 'low':
@@ -17,7 +20,8 @@ function addRiskItem(riskName, riskLevel, department) { // Task2- Adding Risk It
         case 'high':
             riskCard.classList.add('risk-high');
             break;
-    }
+    } // Adding risk level class based on severity
+
     riskCard.innerHTML = `
     <h3>${riskName}</h3>
     <p class="riskLevel">Risk Level: ${riskLevel}</p>
@@ -26,15 +30,15 @@ function addRiskItem(riskName, riskLevel, department) { // Task2- Adding Risk It
     `; // ^^ Task3- Removing Risk Items ^^
 
     // Task6- Handling Event Propagation
-    const resolveBtn = riskCard.querySelector('.resolveBtn');
+    const resolveBtn = riskCard.querySelector('.resolveBtn'); // Adding eventlistener to resolveBtn
     resolveBtn.addEventListener('click', function(e) {
-        e.stopPropagation();
+        e.stopPropagation(); // Prevent click from bubbling up
         riskDashboard.removeChild(riskCard);
     });
     riskCard.addEventListener('click', function(e) {
-        e.stopPropagation();
+        e.stopPropagation(); // Stopping propagation within card
     });
-    riskDashboard.appendChild(riskCard);
+    riskDashboard.appendChild(riskCard); // Appending to dashbaord
 }
 
 // Task5- Implementing Bulk Updates
@@ -43,7 +47,9 @@ function increaseRiskLevels() {
     riskCards.forEach(card => {
         const riskLevelElement = card.querySelector('.riskLevel');
         let currentLevel = riskLevelElement.textContent.replace('Risk Level: ', '');
-        card.classList.remove('risk-low', 'risk-medium', 'risk-high');
+
+        card.classList.remove('risk-low', 'risk-medium', 'risk-high'); // Removing existing risk level
+
         if (currentLevel === 'Low') {
             currentLevel = 'Medium';
             card.classList.add('risk-medium');
@@ -52,21 +58,23 @@ function increaseRiskLevels() {
             card.classList.add('risk-high');
         } else if (currentLevel === 'High') {
             card.classList.add('risk-high');   
-        }
+        } // Updating risk level
         riskLevelElement.textContent = `Risk Level: ${currentLevel}`;
     });
 }
 
 riskForm.addEventListener('submit', function(e) {
-    e.preventDefault();
+    e.preventDefault(); // Preventing form from refreshing page
+
     const riskName = document.getElementById('riskName').value;
     const riskLevel = document.getElementById('riskLevel').value;
-    const department = document.getElementById('department').value;
-    addRiskItem(riskName, riskLevel, department);
-    riskForm.reset();
+    const department = document.getElementById('department').value; // Getting form values
+
+    addRiskItem(riskName, riskLevel, department); // New risk item
+    riskForm.reset(); // Resetting form
 });
 
-increaseRiskBtn.addEventListener('click', increaseRiskLevels);
+increaseRiskBtn.addEventListener('click', increaseRiskLevels); // Adding eventlistener for increase risk levels
 
 // Test Cases
 addRiskItem("Data Breach", "High", "IT");
