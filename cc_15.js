@@ -9,7 +9,11 @@ function addRiskItem(riskName, riskLevel, department) {
     <h3>${riskName}</h3>
     <p>Risk Level: ${riskLevel}</p>
     <p>Department: ${department}</p>
-    `;
+    <button class="resolveBtn>Resolve</button> 
+    `; // Task3- Removing Risk Items
+    riskCard.querySelector('.resolveBtn').addEventListener('click', function() {
+        riskDashboard.removeChild(riskCard);
+    })
     riskDashboard.appendChild(riskCard);
 }
 riskForm.addEventListener('submit', function(e) {
@@ -23,3 +27,4 @@ riskForm.addEventListener('submit', function(e) {
 // Test Cases
 addRiskItem("Data Breach", "High", "IT");
 addRiskItem("Supply Chain Disruption", "Medium", "Operations");
+addRiskItem("Market Fluctuations", "High", "Finance"); // Clicking "Resolve" should remove this risk from the dashboard.
