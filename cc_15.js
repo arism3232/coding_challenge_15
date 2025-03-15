@@ -23,10 +23,17 @@ function addRiskItem(riskName, riskLevel, department) { // Task2- Adding Risk It
     <p class="riskLevel">Risk Level: ${riskLevel}</p>
     <p>Department: ${department}</p>
     <button class="resolveBtn>Resolve</button> 
-    `; // Task3- Removing Risk Items
-    riskCard.querySelector('.resolveBtn').addEventListener('click', function() {
+    `; // ^^ Task3- Removing Risk Items ^^
+
+    // Task6- Handling Event Propagation
+    const resolveBtn = riskCard.querySelector('.resolveBtn');
+    resolveBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
         riskDashboard.removeChild(riskCard);
-    })
+    });
+    riskCard.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
     riskDashboard.appendChild(riskCard);
 }
 
@@ -58,6 +65,9 @@ riskForm.addEventListener('submit', function(e) {
     addRiskItem(riskName, riskLevel, department);
     riskForm.reset();
 });
+
+increaseRiskBtn.addEventListener('click', increaseRiskLevels);
+
 // Test Cases
 addRiskItem("Data Breach", "High", "IT");
 addRiskItem("Supply Chain Disruption", "Medium", "Operations");
