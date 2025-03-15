@@ -1,8 +1,9 @@
 // Task1- Creating the Base Structure
 const riskDashboard = document.getElementById('riskDashboard');
 const riskForm = document.getElementById('riskForm'); // Task2- Adding Risk Items Dynamically
+const increaseRiskBtn = document.getElementById('increaseRiskBtn'); // Task5- Implementing Bulk Updates
 console.log("Risk Dashboard Loaded");
-function addRiskItem(riskName, riskLevel, department) {
+function addRiskItem(riskName, riskLevel, department) { // Task2- Adding Risk Items Dynamically
     const riskCard = document.createElement('div');
     riskCard.className = 'riskCard';
     // Task4- Categorizing Risks By Level
@@ -19,7 +20,7 @@ function addRiskItem(riskName, riskLevel, department) {
     }
     riskCard.innerHTML = `
     <h3>${riskName}</h3>
-    <p>Risk Level: ${riskLevel}</p>
+    <p class="riskLevel">Risk Level: ${riskLevel}</p>
     <p>Department: ${department}</p>
     <button class="resolveBtn>Resolve</button> 
     `; // Task3- Removing Risk Items
@@ -28,6 +29,27 @@ function addRiskItem(riskName, riskLevel, department) {
     })
     riskDashboard.appendChild(riskCard);
 }
+
+// Task5- Implementing Bulk Updates
+function increaseRiskLevels() {
+    const riskCards = document.querySelectorAll('.riskCard');
+    riskCards.forEach(card => {
+        const riskLevelElement = card.querySelector('.riskLevel');
+        let currentLevel = riskLevelElement.textContent.replace('Risk Level: ', '');
+        card.classList.remove('risk-low', 'risk-medium', 'risk-high');
+        if (currentLevel === 'Low') {
+            currentLevel = 'Medium';
+            card.classList.add('risk-medium');
+        } else if (currentLevel === 'Medium') {
+            currentLevel = 'High';
+            card.classList.add('risk-high');
+        } else if (currentLevel === 'High') {
+            card.classList.add('risk-high');   
+        }
+        riskLevelElement.textContent = `Risk Level: ${currentLevel}`;
+    });
+}
+
 riskForm.addEventListener('submit', function(e) {
     e.preventDefault();
     const riskName = document.getElementById('riskName').value;
@@ -42,3 +64,4 @@ addRiskItem("Supply Chain Disruption", "Medium", "Operations");
 addRiskItem("Market Fluctuations", "High", "Finance"); // Clicking "Resolve" should remove this risk from the dashboard.
 addRiskItem("Cybersecurity Threat", "High", "IT");
 addRiskItem("HR Compliance Issue", "Low", "Human Resources");
+addRiskItem("Employee Retention", "Low", "HR"); // Clicking "Increase Risk Levels" should change it to "Medium".
