@@ -6,16 +6,44 @@
     <title>Risk Management Dashboard</title>
     <!--Task1- Creating the Base Structure-->
     <style>
-        #riskDashboard {
-            margin: 20px;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
             padding: 20px;
+            background-color: #f0f0f0;
         }
-        form {
+        #riskDashboard {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+        }
+        #riskForm {
+            display: flex;
+            gap: 10px;
             margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        #riskForm input, #riskForm select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            flex: 1;
+            min-width: 150px;
+        }
+        #riskForm button{
+            padding: 8px 16px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
         .riskCard {
             border: 1px solid #ccc;
-            padding: 10px;
+            padding: 15px;
             margin: 10px 0;
             border-radius: 5px;
             background-color: #f9f9f9;
@@ -28,6 +56,14 @@
         }
         .risk-high {
             background-color: #ff9999;
+        }
+        .resolveBtn {
+            background-color: #f44336;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
         }
         #increaseRiskBtn {
             background-color: #4caf50;
