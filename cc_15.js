@@ -31,7 +31,7 @@ function addRiskItem(riskName, riskLevel, department) { // Function to add risk 
     <h3>${riskName}</h3>
     <p class="riskLevel">Risk Level: ${normalizedLevel}</p>
     <p>Department: ${department}</p>
-    <button class="resolveBtn>Resolve</button> 
+    <button class="resolveBtn">Resolve</button> 
     `; // ^^ Task3- Removing Risk Items ^^
 
     // Task6- Handling Event Propagation
